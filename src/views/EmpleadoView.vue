@@ -2,6 +2,9 @@
     <div class="empleados pa-8">
         <AddButton :color="'#7170E6'" @click="showFormDialog = true" />
 
+        <AddEmpleadoDialog :showFormDialog="showFormDialog" @add-empleado="addNewEmpleado"
+            @close-dialog="showFormDialog = false" />
+
         <div class="empleado-grid">
             <EmpleadoCard v-for="(employee, index) in employees" :key="index" :employee="employee"
                 @show-employee-dialog="showEmployeeDialog(employee)" />
@@ -16,11 +19,13 @@ import axios from 'axios';
 import EmpleadoCard from '../components/EmpleadoCard.vue';
 import EmployeeDialog from '../components/EmpleadoDialog.vue';
 import AddButton from '../components/AddButton.vue';
+import AddEmpleadoDialog from '../components/AddEmpleadoDialog.vue';
 
 export default {
     name: 'Empleados',
     components: {
         AddButton,
+        AddEmpleadoDialog,
         EmpleadoCard,
         EmployeeDialog,
     },
@@ -52,13 +57,19 @@ export default {
             this.selectedEmployee = employee;
             this.dialog = true;
         },
-        openAddDialog() {
-            // Handle opening add dialog here
-            // For example:
-            // this.$router.push('/add-employee');
-        },
+        addNewEmpleado(newEmpleado) {
+            axios
+                .post('http://localhost:8080/empleados', newEmpleado)
+                .then(response => {
+                    // Assuming the response contains the newly added employee data
+                    this.employees.push(response.data);
+                })
+                .catch(error => {
+                    console.error('Error adding new employee:', error);
+                });
+        }
     }
-};
+}
 </script>
 
 <style scoped>
