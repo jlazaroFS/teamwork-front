@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Inicio',
   mounted() {
     this.$emit('updateTitle', this.$options.name);
   }

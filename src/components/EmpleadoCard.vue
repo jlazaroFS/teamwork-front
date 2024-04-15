@@ -1,5 +1,5 @@
 <template>
-  <div @mouseenter="hover = true" @mouseleave="hover = false" class="employee-button">
+  <div @mouseenter="hover = true" @mouseleave="hover = false" @click="showEmployeeDialog" class="employee-button">
     <img v-if="employee.imageDataUrl" :src="employee.imageDataUrl" :alt="employee.txNombre" class="employee-image">
     <img v-else src="../assets/placeholder.png" alt="Sin foto de perfil" class="employee-image">
     <p :class="{ 'employee-name': true, 'employee-name-hover': hover }">{{ employee.txNombre }}</p>
@@ -17,6 +17,11 @@ export default {
   data() {
     return {
       hover: false
+    }
+  },
+  methods: {
+    showEmployeeDialog() {
+      this.$emit('show-employee-dialog', this.employee);
     }
   }
 }
