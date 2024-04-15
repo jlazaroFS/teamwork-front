@@ -4,7 +4,7 @@
             <v-card>
                 <v-card-title>Alta de empleado</v-card-title>
                 <v-card-text>
-                    <form @submit.prevent="addNewEmpleado">
+                    <form @submit.prevent="submitForm">
                         <v-text-field v-model="newEmpleado.txNif" label="NIF"></v-text-field>
                         <v-text-field v-model="newEmpleado.txNombre" label="Nombre"></v-text-field>
                         <v-text-field v-model="newEmpleado.txApellido1" label="Primer apellido"></v-text-field>
@@ -56,20 +56,51 @@ export default {
         };
     },
     methods: {
+        submitForm() {
+            // Ensure all required fields are filled
+            if (this.validateForm()) {
+                this.addNewEmpleado();
+            }
+        },
+        validateForm() {
+            // Validate all required fields
+            return (
+                this.newEmpleado.txNif &&
+                this.newEmpleado.txNombre &&
+                this.newEmpleado.txApellido1 &&
+                this.newEmpleado.txApellido2 &&
+                this.newEmpleado.fNacimiento &&
+                this.newEmpleado.fAlta &&
+                this.newEmpleado.nTelefono1 &&
+                this.newEmpleado.nTelefono2 &&
+                this.newEmpleado.email &&
+                this.newEmpleado.cxEdocivil &&
+                this.newEmpleado.bServmilitar
+            );
+        },
         addNewEmpleado() {
+            // Emit 'add-empleado' event with newEmpleado data
             this.$emit('add-empleado', this.newEmpleado);
-            this.newEmpleado.txNif = '';
-            this.newEmpleado.txNombre = '';
-            this.newEmpleado.txApellido1 = '';
-            this.newEmpleado.txApellido2 = '';
-            this.newEmpleado.fNacimiento = '';
-            this.newEmpleado.fAlta = '';
-            this.newEmpleado.nTelefono1 = '';
-            this.newEmpleado.nTelefono2 = '';
-            this.newEmpleado.email = '';
-            this.newEmpleado.cxEdocivil = '';
-            this.newEmpleado.bServmilitar = '';
+            // Reset form fields
+            this.resetForm();
+            // Close dialog
             this.$emit('close-dialog', false);
+        },
+        resetForm() {
+            // Reset all form fields
+            this.newEmpleado = {
+                txNif: '',
+                txNombre: '',
+                txApellido1: '',
+                txApellido2: '',
+                fNacimiento: '',
+                fAlta: '',
+                nTelefono1: '',
+                nTelefono2: '',
+                email: '',
+                cxEdocivil: '',
+                bServmilitar: ''
+            };
         },
         dialogClosed(value) {
             if (!value) {
@@ -77,5 +108,5 @@ export default {
             }
         }
     }
-}
+};
 </script>

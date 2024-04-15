@@ -58,18 +58,25 @@ export default {
             this.dialog = true;
         },
         addNewEmpleado(newEmpleado) {
+            newEmpleado.cxEdocivil = newEmpleado.cxEdocivil == 'Casado/a' ? 'C' : 'S'
+            newEmpleado.bServmilitar = newEmpleado.bServmilitar == 'Sí' ? 'S' : 'N';
             axios
                 .post('http://localhost:8080/empleados', newEmpleado)
                 .then(response => {
-                    // Assuming the response contains the newly added employee data
                     this.employees.push(response.data);
+                    this.showFormDialog = false;
+                    this.$notify({
+                        title: 'Éxito',
+                        text: 'El empleado ha sido dado de alta correctamente.',
+                        type: 'success'
+                    });
                 })
                 .catch(error => {
                     console.error('Error adding new employee:', error);
                 });
         }
     }
-}
+};
 </script>
 
 <style scoped>
