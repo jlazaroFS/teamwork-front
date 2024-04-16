@@ -74,7 +74,8 @@ export default {
                 this.surname1Errors.length +
                 this.surname2Errors.length +
                 this.telephone1Errors.length +
-                this.telephone2Errors.length === 0;
+                this.telephone2Errors.length +
+                this.emailErrors.length === 0;
         },
         minDOB() {
             // Calculate the minimum date of birth (e.g., 100 years ago)
