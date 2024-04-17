@@ -65,14 +65,19 @@ export default {
                 .then(response => {
                     this.employees.push(response.data);
                     this.showFormDialog = false;
-                    this.$notify({
-                        title: 'Éxito',
-                        text: 'El empleado ha sido dado de alta correctamente.',
-                        type: 'success'
-                    });
                 })
                 .catch(error => {
                     console.error('Error adding new employee:', error);
+                });
+        },
+        darDeBaja(unlistedEmpleado) {
+            print("hola")
+            const today = new Date().toISOString().split('T')[0];
+            const empleadoId = unlistedEmpleado.empleadoId;
+            axios
+                .put(`http://localhost:8080/empleados/baja/${empleadoId}`)
+                .catch(error => {
+                    console.error('Error unlisting employee:', error);
                 });
         }
     }

@@ -10,6 +10,8 @@
                         <div>
                             <v-card-text class="mt-3">
                                 <p class="info-line"><v-icon class="mr-3">mdi-card-account-details</v-icon>
+                                    {{ selectedEmployee.idEmpleado }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-card-account-details</v-icon>
                                     {{ selectedEmployee.txNif }}</p>
                                 <p class="info-line"><v-icon class="mr-3">mdi-cake</v-icon>
                                     {{ formatDate(selectedEmployee.fNacimiento) }}</p>
@@ -50,6 +52,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     props: {
         dialog: {
@@ -80,6 +84,16 @@ export default {
         formatMilitaryService(service) {
             return service === 'S' ? 'Ha completado el servicio militar' : 'No ha completado el servicio militar';
         },
+        darDeBaja() {
+            axios
+                .put(`http://localhost:8080/empleados/baja/${this.selectedEmployee.idEmpleado}`)
+                .then(response => {
+                    this.closeDialog();
+                })
+                .catch(error => {
+                    console.error('Error unlisting employee:', error);
+                });
+        }
     }
 }
 </script>
