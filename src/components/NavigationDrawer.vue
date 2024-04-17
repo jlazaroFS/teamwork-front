@@ -32,7 +32,8 @@ export default {
   data: () => ({
     homeItem: { title: 'Inicio', icon: 'mdi-home', to: '/' },
     items: [
-      { title: 'Empleados', icon: 'mdi-account', to: '/emp' }
+      { title: 'Empleados', icon: 'mdi-account', to: '/emp' },
+      { title: 'Proyectos', icon: 'mdi-lightbulb-on', to: '/pro' }
     ],
   }),
 };

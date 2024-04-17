@@ -47,7 +47,6 @@ export default {
             axios
                 .get(`http://localhost:8080/empleados`)
                 .then(response => {
-                    // Filter out employees with fBaja as null
                     this.employees = response.data.filter(employee => employee.fBaja === null);
                 })
                 .catch(error => {
