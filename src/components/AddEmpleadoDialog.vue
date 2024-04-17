@@ -78,13 +78,11 @@ export default {
                 this.emailErrors.length === 0;
         },
         minDOB() {
-            // Calculate the minimum date of birth (e.g., 100 years ago)
             const today = new Date();
-            const minYear = today.getFullYear() - 100;
+            const minYear = today.getFullYear() - 67;
             return `${minYear}-${this.formatDate(today.getMonth() + 1)}-${this.formatDate(today.getDate())}`;
         },
         maxDOB() {
-            // Calculate the maximum date of birth (e.g., today)
             const today = new Date();
             const maxYear = today.getFullYear() - 18;
             return `${maxYear}-${this.formatDate(today.getMonth() + 1)}-${this.formatDate(today.getDate())}`;
@@ -94,7 +92,6 @@ export default {
                 return this.minDOB; // If no date of birth is selected, return the minimum date of birth
             }
 
-            // Calculate the minimum "Fecha de alta" as date of birth + 18 years
             const minDate = new Date(this.newEmpleado.fNacimiento);
             minDate.setFullYear(minDate.getFullYear() + 18);
             return minDate.toISOString().slice(0, 10); // Format the date as YYYY-MM-DD
