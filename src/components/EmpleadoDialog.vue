@@ -9,21 +9,20 @@
                     <v-col cols="6">
                         <div>
                             <v-card-text class="mt-3">
-                                <p class="info-line"><v-icon class="mr-3">mdi-card-account-details</v-icon> {{
-        selectedEmployee.txNif
-    }}</p>
-                                <p class="info-line"><v-icon class="mr-3">mdi-cake</v-icon> {{
-            formatDate(selectedEmployee.fNacimiento) }}</p>
-                                <p class="info-line"><v-icon class="mr-3">mdi-phone</v-icon> {{
-        selectedEmployee.nTelefono1 }}</p>
-                                <p class="info-line"><v-icon class="mr-3">mdi-email</v-icon> {{ selectedEmployee.email
-                                    }}</p>
-                                <p class="info-line"><v-icon class="mr-3">mdi-calendar-clock</v-icon>{{
-        formatDate(selectedEmployee.fAlta) }}</p>
-                                <p class="info-line"><v-icon class="mr-3">mdi-ring</v-icon>{{
-        formatCivilStatus(selectedEmployee.cxEdocivil) }}</p>
-                                <p class="info-line"><v-icon class="mr-3">mdi-shield-half-full</v-icon>{{
-                                    formatMilitaryService(selectedEmployee.bServmilitar) }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-card-account-details</v-icon>
+                                    {{ selectedEmployee.txNif }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-cake</v-icon>
+                                    {{ formatDate(selectedEmployee.fNacimiento) }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-phone</v-icon>
+                                    {{ selectedEmployee.nTelefono1 }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-email</v-icon>
+                                    {{ selectedEmployee.email }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-calendar-clock</v-icon>
+                                    {{ formatDate(selectedEmployee.fAlta) }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-ring</v-icon>
+                                    {{ formatCivilStatus(selectedEmployee.cxEdocivil) }}</p>
+                                <p class="info-line"><v-icon class="mr-3">mdi-shield-half-full</v-icon>
+                                    {{ formatMilitaryService(selectedEmployee.bServmilitar) }}</p>
                             </v-card-text>
                         </div>
                     </v-col>
@@ -39,7 +38,11 @@
             <v-card-actions>
                 <v-btn color="primary" text @click="closeDialog">
                     <v-icon>mdi-close</v-icon>
-                    Close
+                    Cerrar
+                </v-btn>
+                <v-btn color="error" text @click="darDeBaja">
+                    <v-icon>mdi-account-remove</v-icon>
+                    Dar de baja
                 </v-btn>
             </v-card-actions>
         </v-card>
