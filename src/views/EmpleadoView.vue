@@ -10,7 +10,8 @@
                 @show-employee-dialog="showEmployeeDialog(employee)" />
         </div>
 
-        <EmployeeDialog :dialog="dialog" :selectedEmployee="selectedEmployee" @close-dialog="dialog = false" />
+        <EmployeeDialog :dialog="dialog" :selectedEmployee="selectedEmployee" @close-dialog="dialog = false"
+            @unlist-empleado="unlistEmpleado" />
     </div>
 </template>
 
@@ -70,15 +71,16 @@ export default {
                     console.error('Error adding new employee:', error);
                 });
         },
-        darDeBaja(unlistedEmpleado) {
-            print("hola")
-            const today = new Date().toISOString().split('T')[0];
-            const empleadoId = unlistedEmpleado.empleadoId;
+        unlistEmpleado(id) {
             axios
-                .put(`http://localhost:8080/empleados/baja/${empleadoId}`)
+                .put(`http://localhost:8080/empleados/baja/${id}`)
+                .then(response => {
+                    this.fetchEmployees();
+                })
                 .catch(error => {
                     console.error('Error unlisting employee:', error);
                 });
+
         }
     }
 };
