@@ -38,6 +38,13 @@ export default {
             showFormDialog: false,
         };
     },
+    computed: {
+        currentFullName() {
+            return this.selectedEmployee.txNombre
+                + " " + this.selectedEmployee.txApellido1
+                + " " + this.selectedEmployee.txApellido2;
+        }
+    },
     mounted() {
         this.fetchEmployees();
         this.$emit('updateTitle', this.$options.name);
@@ -78,8 +85,9 @@ export default {
                 })
                 .catch(error => {
                     console.error('Error unlisting employee:', error);
+                    alert("Error al dar de baja a " + this.currentFullName
+                        + ". Los empleados con proyectos asignados no pueden darse de baja.");
                 });
-
         }
     }
 };
