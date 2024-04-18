@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-data-table :headers="headers" :items="projects" :items-per-page="5" class="elevation-1"></v-data-table>
+        <ProyectosTable :projects="projects" :headers="headers" @unlist-project="unlistProject" />
         <AddButton color="primary" @click="openDialog" />
         <AddProyectoDialog :dialog="dialog" @close-dialog="dialog = false" @save-project="saveProject" />
     </div>
@@ -10,11 +10,13 @@
 import axios from 'axios';
 import AddButton from '../components/AddButton.vue';
 import AddProyectoDialog from '../components/AddProyectoDialog.vue';
+import ProyectosTable from '../components/ProyectosTable.vue';
 
 export default {
     components: {
         AddButton,
         AddProyectoDialog,
+        ProyectosTable
     },
     data() {
         return {
@@ -25,6 +27,7 @@ export default {
                 { text: 'Fecha de finalización', value: 'fFin' },
                 { text: 'Lugar', value: 'txLugar' },
                 { text: 'Observaciones', value: 'txObservaciones' },
+                { text: 'Acción', sortable: false, value: 'action' } // Columna para el botón de eliminar
             ],
             projects: [],
             dialog: false,
@@ -58,6 +61,17 @@ export default {
         openDialog() {
             this.dialog = true;
         },
+        unlistProject(project) {
+            const projectId = project.idProyecto; // Suponiendo que existe una propiedad idProyecto
+            axios
+                .put(`http://localhost:8080/proyectos/baja/${projectId}`)
+                .then(response => {
+                    this.fetchProjects();
+                })
+                .catch(error => {
+                    console.error('Error unlisting project:', error);
+                });
+        }
     },
 };
 </script>
