@@ -27,7 +27,7 @@ export default {
                 { text: 'Fecha de finalización', value: 'fFin' },
                 { text: 'Lugar', value: 'txLugar' },
                 { text: 'Observaciones', value: 'txObservaciones' },
-                { text: 'Acción', sortable: false, value: 'action' } // Columna para el botón de eliminar
+                { text: 'Dar de baja', sortable: false, value: 'unlist' }
             ],
             projects: [],
             dialog: false,
@@ -62,7 +62,7 @@ export default {
             this.dialog = true;
         },
         unlistProject(project) {
-            const projectId = project.idProyecto; // Suponiendo que existe una propiedad idProyecto
+            const projectId = project.idProyecto;
             axios
                 .put(`http://localhost:8080/proyectos/baja/${projectId}`)
                 .then(response => {
@@ -70,6 +70,7 @@ export default {
                 })
                 .catch(error => {
                     console.error('Error unlisting project:', error);
+                    alert("Error al dar de baja el proyecto " + project.txDescripcion + ". El proyecto tiene empleados asignados.")
                 });
         }
     },

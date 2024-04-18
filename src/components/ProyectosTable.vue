@@ -1,6 +1,6 @@
 <template>
     <v-data-table :headers="headers" :items="projects" :items-per-page="5" class="elevation-1">
-        <template v-slot:item.action="{ item }">
+        <template v-slot:item.unlist="{ item }">
             <v-btn icon color="error" @click="unlistProject(item)">
                 <v-icon>mdi-close</v-icon>
             </v-btn>
