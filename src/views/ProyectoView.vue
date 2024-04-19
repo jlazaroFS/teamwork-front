@@ -2,7 +2,9 @@
     <div>
         <ProyectosTable :projects="projects" :headers="headers" @unlist-project="unlistProject" />
         <AddButton color="primary" @click="openDialog" />
+        <AssignButton color="secondary" @click="openAssignments" />
         <AddProyectoDialog :dialog="dialog" @close-dialog="dialog = false" @save-project="saveProject" />
+        <AssignDialog :dialog="assignments" @close-dialog="assignments = false" />
     </div>
 </template>
 
@@ -11,12 +13,16 @@ import axios from 'axios';
 import AddButton from '../components/AddButton.vue';
 import AddProyectoDialog from '../components/AddProyectoDialog.vue';
 import ProyectosTable from '../components/ProyectosTable.vue';
+import AssignButton from '../components/AssignButton.vue';
+import AssignDialog from '../components/AssignDialog.vue';
 
 export default {
     components: {
         AddButton,
         AddProyectoDialog,
-        ProyectosTable
+        ProyectosTable,
+        AssignButton,
+        AssignDialog
     },
     data() {
         return {
@@ -27,10 +33,11 @@ export default {
                 { text: 'Fecha de finalización', value: 'fFin' },
                 { text: 'Lugar', value: 'txLugar' },
                 { text: 'Observaciones', value: 'txObservaciones' },
-                { text: 'Dar de baja', sortable: false, value: 'unlist' }
+                { text: '', sortable: false, value: 'unlist' },
             ],
             projects: [],
             dialog: false,
+            assignments: false,
         };
     },
     created() {
@@ -60,6 +67,9 @@ export default {
         },
         openDialog() {
             this.dialog = true;
+        },
+        openAssignments() {
+            this.assignments = true;
         },
         unlistProject(project) {
             const projectId = project.idProyecto;
