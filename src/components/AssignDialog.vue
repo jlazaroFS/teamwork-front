@@ -68,25 +68,27 @@ export default {
         },
         fetchEmployeesForProject(projectId) {
             axios
-                .get(`http://localhost:8080/assignments`)
+                .get(`http://localhost:8080/assignments/${projectId}`)
                 .then(response => {
-                    this.currAssignedEmployees = response.data.filter(assignment => assignment.id.idProyecto === projectId).map(assignment => assignment.id.idEmpleado);
-                })
-                .catch(error => {
-                    console.error('Error al obtener las asignaciones:', error)
-                })
-            axios
-                .get(`http://localhost:8080/empleados`)
-                .then(response => {
-                    // Filtrar empleados que no están dados de baja
-                    this.employees = response.data.filter(employee => employee.fBaja === null);
+                    this.currAssignedEmployees = response.data;
 
-                    this.selectedEmployees = this.employees.map(employee => {
-                        return this.currAssignedEmployees.some(id => id === employee.idEmpleado);
-                    });
+                    axios
+                        .get(`http://localhost:8080/empleados`)
+                        .then(response => {
+                            // Filter employees that are not deactivated
+                            this.employees = response.data.filter(employee => employee.fBaja === null);
+
+                            // Map selectedEmployees based on whether employee is assigned
+                            this.selectedEmployees = this.employees.map(employee => {
+                                return this.currAssignedEmployees.some(id => id === employee.idEmpleado);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching employees:', error);
+                        });
                 })
                 .catch(error => {
-                    console.error('Error fetching employees:', error);
+                    console.error('Error al obtener las asignaciones:', error);
                 });
         },
         assignProject() {
