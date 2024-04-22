@@ -1,6 +1,6 @@
 <template>
     <div class="empleados pa-8">
-        <AddButton :color="'#7170E6'" @click="showFormDialog = true" />
+        <AddButton :color="'#BB0000'" @click="showFormDialog = true" />
 
         <AddEmpleadoDialog :showFormDialog="showFormDialog" @add-empleado="addNewEmpleado"
             @close-dialog="showFormDialog = false" />

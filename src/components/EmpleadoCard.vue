@@ -50,7 +50,7 @@ export default {
 
 .employee-name {
   text-align: center;
-  background-color: #7170E6;
+  background-color: #B50047;
   color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -58,7 +58,7 @@ export default {
 }
 
 .employee-name-hover {
-  color: black;
+  color: #B50047;
   background-color: #ccc;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app>
+  <v-navigation-drawer v-model="drawer" app color="#bb0000" dark> <!-- Ajusta el color aquí -->
     <v-list dense nav>
       <v-list-item :to="homeItem.to" link>
         <v-list-item-icon>

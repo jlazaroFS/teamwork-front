@@ -1,7 +1,7 @@
 <template>
     <div>
         <ProyectosTable :projects="projects" :headers="headers" @unlist-project="unlistProject" />
-        <AddButton color="primary" @click="openDialog" />
+        <AddButton color="#BB0000" @click="openDialog" />
         <AssignButton color="secondary" @click="openAssignments" />
         <AddProyectoDialog :dialog="dialog" @close-dialog="dialog = false" @save-project="saveProject" />
         <AssignDialog :dialog="assignments" @close-dialog="assignments = false" />
