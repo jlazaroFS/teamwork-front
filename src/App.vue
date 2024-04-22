@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <NavigationDrawer :drawer="drawer" :items="items" @toggleDrawer="toggleDrawer" />
 
-    <v-app-bar app color="#bb0000" dark> <!-- Ajusta el color aquí -->
+    <v-app-bar app color="#bb0000" dark>
       <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
     </v-app-bar>
@@ -22,7 +22,7 @@ export default {
   },
   data: () => ({
     drawer: null,
-    pageTitle: 'Application'
+    pageTitle: 'Teamwork'
   }),
   methods: {
     toggleDrawer() {

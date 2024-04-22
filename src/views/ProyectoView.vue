@@ -17,6 +17,7 @@ import AssignButton from '../components/AssignButton.vue';
 import AssignDialog from '../components/AssignDialog.vue';
 
 export default {
+    name: 'Proyectos',
     components: {
         AddButton,
         AddProyectoDialog,
@@ -42,6 +43,9 @@ export default {
     },
     created() {
         this.fetchProjects();
+    },
+    mounted() {
+        this.$emit('updateTitle', this.$options.name);
     },
     methods: {
         fetchProjects() {
